@@ -64,6 +64,56 @@ public class VarastoTest {
         // varastossa pitäisi olla tilaa 10 - 8 + 2 eli 4
         assertEquals(4, varasto.paljonkoMahtuu(), vertailuTarkkuus);
     }
+    
+    @Test
+    public void lisaaLiikaa(){
+        varasto.lisaaVarastoon(11.0);
+        assertEquals(0, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void lisaaTayteen(){
+        varasto.lisaaVarastoon(10.0);
+        assertEquals(0, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void lisaaLiikaa2(){
+        varasto.lisaaVarastoon(12.0);
+        assertEquals(10, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void otaLiikaa(){
+        varasto.lisaaVarastoon(2.0);
+        varasto.otaVarastosta(3.0);
+        assertEquals(10, varasto.paljonkoMahtuu(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void otaLiikaa2(){
+        varasto.lisaaVarastoon(2.0);
+        varasto.otaVarastosta(4.0);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void otaLiikaa3(){
+        varasto.lisaaVarastoon(3.0);
+        double otettu = varasto.otaVarastosta(5.0);
+        assertEquals(3.0, otettu, vertailuTarkkuus);
+    }
+    
+    @Test
+    public void lisaaNegatiivinen(){
+        varasto.lisaaVarastoon(-1);
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
+    }
+    
+    @Test
+    public void otaNegatiivinen(){
+        assertEquals(0, varasto.otaVarastosta(-1), vertailuTarkkuus);
+    }
 
     @Test
     public void konstr() {
@@ -74,5 +124,6 @@ public class VarastoTest {
         varasto = new Varasto(-1,2);
         varasto = new Varasto(-1,-1);
         varasto.toString();
+        assertEquals(0, varasto.getSaldo(), vertailuTarkkuus);
     }
 }
