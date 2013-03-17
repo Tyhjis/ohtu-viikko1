@@ -112,7 +112,7 @@ public class VarastoTest {
     
     @Test
     public void otaNegatiivinen(){
-        assertEquals(1, varasto.otaVarastosta(-1), vertailuTarkkuus);
+        assertEquals(2, varasto.otaVarastosta(-1), vertailuTarkkuus);
     }
 
     @Test
